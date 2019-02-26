@@ -31,21 +31,14 @@ public class ConsumerTopicEstoque {
 
             public void onMessage(Message message) {
 
+                TextMessage textMessage = (TextMessage) message;
+
                 try {
-                    System.out.println(((TextMessage)message).getText());
-                    session.recover();
+                    System.out.println(textMessage.getText());
+                    throw new RuntimeException("Erro causado propostitalmente para validar o envio para a DLQ");
                 } catch (JMSException e) {
                     e.printStackTrace();
                 }
-                throw new RuntimeException("teste");
-//                TextMessage textMessage = (TextMessage) message;
-//
-//                try {
-//                    System.out.println(textMessage.getText());
-//                    throw new RuntimeException("Erro causado propostitalmente para validar o envio para a DLQ");
-//                } catch (JMSException e) {
-//                    e.printStackTrace();
-//                }
             }
 
         });

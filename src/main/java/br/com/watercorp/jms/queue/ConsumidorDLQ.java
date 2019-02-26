@@ -30,14 +30,15 @@ public class ConsumidorDLQ {
         consumer.setMessageListener(new MessageListener() {
             public void onMessage(Message message) {
                 try {
-                    //Utilizado quando a sessão é configurado como CLIENT_ANKNOWLEDGE
-                    //a mensagem sempre vai ser consumida quando iniciar o consumidor
-                    //nunca mudando de status difertente de mensagens pendentes
-//                    message.acknowledge();
-
-                    //Utiliados com a opção SESSION_TRANSACTED
-                    //session.acommit();
-                    //session.rollback();
+                    /**
+                     * message.acknowledge() - Utilizado quando a sessão é configurada com a opção CLIENT_ANKNOWLEDGE.
+                     * A mensagem tentará ser consumida sempre ao iniciar o consumidor, mas
+                     * nunca mudará de status pendente enquanto não for utilizao o messagge.acknowledge()
+                     *
+                     * Utilizados com a opção SESSION_TRANSACTED
+                     * session.acommit();
+                     * session.rollback();
+                     **/
                     System.out.println(((TextMessage) message).getText());
                 } catch (JMSException e) {
                     e.printStackTrace();
