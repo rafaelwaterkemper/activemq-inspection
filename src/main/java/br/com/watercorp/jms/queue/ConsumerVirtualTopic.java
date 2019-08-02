@@ -1,13 +1,13 @@
-package br.com.watercorp.jms.topic;
+package br.com.watercorp.jms.queue;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
 import java.util.Scanner;
 
-public class ConsumerTopicComercial {
+public class ConsumerVirtualTopic{
 
-    public static final String TOPIC_PROMOCOES = "promocoes";
+    public static final String VIRTUAL_TOPIC_PROMOCOES = "Consumer.A.VirtualTopic.promocoes";
 
     public static void main(String[] args) throws JMSException {
         Connection connection = getConnectionLocal("tcp://localhost:61616", "admin", "admin", "waterkemper-2");
@@ -15,22 +15,18 @@ public class ConsumerTopicComercial {
         connection.start();
 
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-        Topic topico = session.createTopic(TOPIC_PROMOCOES);
-
-        MessageConsumer consumer = session.createDurableSubscriber(topico, "consumer-comercial");
+        Queue queue = session.createQueue(VIRTUAL_TOPIC_PROMOCOES);
+        MessageConsumer consumer = session.createConsumer(queue);
 
         consumer.setMessageListener(new MessageListener() {
 
             public void onMessage(Message message) {
-
                 try {
                     System.out.println(((TextMessage) message).getText());
                 } catch (JMSException e) {
                     e.printStackTrace();
                 }
             }
-
         });
 
         new Scanner(System.in).nextLine();
