@@ -15,3 +15,7 @@ Queueu = Non Persisten = TEMP percent used
 Topic = non durable subscriber = dont save message
 Topic = durable subscriber = Non Persistent = TEMP percent used
 Topic = durable subscriber = Persistent = STORE percent used
+
+VirtualTopic = without a consumer = dont save message
+VirtualTopic = consumer already existent = Non Persistent = TEMP percent used
+VirtualTopic = consumer already existent = Persistent = STORE percent used
