@@ -19,3 +19,6 @@ Topic = durable subscriber = Persistent = STORE percent used
 VirtualTopic = without a consumer = dont save message
 VirtualTopic = consumer already existent = Non Persistent = TEMP percent used
 VirtualTopic = consumer already existent = Persistent = STORE percent used
+
+Create activemq container with disk space with a defined size, for help with tests.
+- docker run --name activeconfig5mb -d -p 8161:8161 -p 61616:61616 -e 'ACTIVEMQ_CONFIG_STOREUSAGE=5mb' webcenter/activemq
